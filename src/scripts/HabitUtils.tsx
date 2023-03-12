@@ -72,6 +72,23 @@ export class Habit {
   }
 }
 
+interface IhabitList {
+  habits: Habit[];
+}
+
+export class HabitList {
+  habits: Habit[];
+  habitsDate: Habit[];
+  habitsCount: Habit[];
+
+  constructor(obj: IhabitList);
+  constructor(obj?: IhabitList) {
+    this.habits = obj?.habits ?? [];
+    this.habitsDate = this.habits.filter((v) => v.days.length > 0);
+    this.habitsCount = this.habits.filter((v) => v.days.length === 0);
+  }
+}
+
 export class JSONParser {
   public static Deserialize(data: string): any {
     return JSON.parse(data, JSONParser.ReviveDateTime);

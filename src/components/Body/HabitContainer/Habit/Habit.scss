@@ -1,22 +1,35 @@
-#habit{
-    width: 32rem;
-    padding: 8px;
+#habit {
+  width: 32rem;
+  padding: 8px;
 
-    border-radius: 8px;
-    border: #494949 solid 2px;
+  border-radius: 8px;
+  border: #494949 solid 2px;
 
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  #habit__row {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    gap: 8px;
+  }
 
-    #habit__title{
-        font-size: 1.5rem;
-        font-weight: 600;
-        color: #494949;
-    }
+  #habit__title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #494949;
+  }
 
-    #habit__streak{
-        display: flex;
-        align-items: flex-end;
-    }
+  #habit__streak {
+    display: flex;
+    align-items: flex-end;
+  }
+
+  #habit__cycle {
+  }
+
+  #habit__completed {
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
 }
