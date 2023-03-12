@@ -1,0 +1,55 @@
+#habit-check {
+  display: flex;
+  gap: 1px;
+
+  .habit-check__button {
+    height: 2.5rem;
+    width: 2.5rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: #494949;
+    border-radius: 4px;
+
+    border: solid 1px #494949;
+    background-color: transparent;
+
+    transition: all 0.3s;
+
+    &#habit-check__button--green {
+      &:hover {
+        border: solid 1px #008000;
+        background-color: rgba($color: #008000, $alpha: 0.3);
+      }
+
+      &.habit-check__button--checked {
+        border: solid 1px #008000;
+        background-color: rgba($color: #008000, $alpha: 0.3);
+      }
+    }
+    &#habit-check__button--yellow {
+      &:hover {
+        border: solid 1px #ff9e01;
+        background-color: rgba($color: #ff9e01, $alpha: 0.3);
+      }
+
+      &.habit-check__button--checked {
+        border: solid 1px #ff9e01;
+        background-color: rgba($color: #ff9e01, $alpha: 0.3);
+      }
+    }
+    &#habit-check__button--red {
+      &:hover {
+        border: solid 1px #c80000;
+        background-color: rgba($color: #c80000, $alpha: 0.3);
+      }
+
+      &.habit-check__button--checked {
+        border: solid 1px #c80000;
+        background-color: rgba($color: #c80000, $alpha: 0.3);
+      }
+    }
+  }
+}

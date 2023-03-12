@@ -1,0 +1,22 @@
+#habit{
+    width: 32rem;
+    padding: 8px;
+
+    border-radius: 8px;
+    border: #494949 solid 2px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    #habit__title{
+        font-size: 1.5rem;
+        font-weight: 600;
+        color: #494949;
+    }
+
+    #habit__streak{
+        display: flex;
+        align-items: flex-end;
+    }
+}
