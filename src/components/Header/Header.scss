@@ -3,27 +3,23 @@
   height: 4rem;
   padding: 0 8px;
 
-  background-color: #f5cac3;
-
   display: flex;
   align-items: center;
   justify-content: flex-start;
 
   #header__create {
     height: 3rem;
-
-    border-radius: 8px;
-    background-color: white;
-    border: black solid 2px;
-
     display: flex;
+    gap: 4px;
 
     #header__input {
       width: 24rem;
       padding: 0.5rem 1rem;
 
       font-size: 1rem;
-      border: none;
+      border: solid #1976d2 2px;
+      border-radius: 8px;
+      
       background-color: transparent;
     }
 
@@ -33,10 +29,9 @@
 
       font-size: 1rem;
       background-color: transparent;
-      border: none;
-
-      border-right: solid black 2px;
-      border-left: solid black 2px;
+      color: gray;
+      border: solid #1976d2 2px;
+      border-radius: 8px;
 
       display: flex;
         align-items: center;
@@ -47,7 +42,9 @@
       width: 3rem;
 
       border: none;
-      background-color: transparent;
+      border-radius: 8px;
+      background-color: #1976d2;
+      color: white;
     }
   }
 }

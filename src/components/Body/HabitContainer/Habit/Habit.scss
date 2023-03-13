@@ -31,5 +31,15 @@
   #habit__completed {
     font-size: 0.8rem;
     font-weight: 600;
+
+    #habit__completed__date{
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #494949;
+
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
   }
 }

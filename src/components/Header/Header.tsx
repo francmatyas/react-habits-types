@@ -3,6 +3,7 @@ import { useState } from "react";
 import HabitFrequency, { FrequencyTags } from "./HabitFrequency/HabitFrequency";
 
 import { HiOutlinePlus } from "react-icons/hi";
+import { Tooltip } from "@mui/material";
 
 function Header() {
   const [show, setShow] = useState(false);
@@ -10,6 +11,10 @@ function Header() {
 
   const [cycle, setCycle] = useState<number>(1);
   const [days, setDays] = useState<string[]>([]);
+
+  function createHandler(): void {
+    console.log(name, cycle, days);
+  }
 
   return (
     <header id="header">
@@ -37,10 +42,11 @@ function Header() {
           onCycleChange={(cycle) => setCycle(cycle)}
           onDaysChange={(days) => setDays(days)}
         />
-
-        <button id="header__button" type="button">
-          <HiOutlinePlus size={24} />
-        </button>
+        <Tooltip title="Add new habit">
+          <button id="header__button" onClick={createHandler}>
+            <HiOutlinePlus size={24} />
+          </button>
+        </Tooltip>
       </div>
     </header>
   );
