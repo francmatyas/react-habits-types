@@ -6,22 +6,36 @@ import { HiOutlinePlus } from "react-icons/hi";
 
 function Header() {
   const [show, setShow] = useState(false);
+  const [name, setName] = useState("");
 
-  console.log(show);
+  const [cycle, setCycle] = useState<number>(1);
+  const [days, setDays] = useState<string[]>([]);
 
   return (
     <header id="header">
       <div id="header__create">
-        <input id="header__input" type="text" placeholder="Name your habit" />
+        <input
+          id="header__input"
+          type="text"
+          placeholder="Name your habit"
+          onChange={(e) => setName(e.target.value)}
+        />
         <button id="header__select" onClick={() => setShow(!show)}>
           <span>Select</span>
-          <FrequencyTags tags={["monday", "friday", "saturday", "sunday", "tuesday", "wednesday"]} />
+
+          {days.length > 0 ? (
+            <FrequencyTags tags={days} />
+          ) : (
+            <FrequencyTags cycle={cycle} />
+          )}
         </button>
         <HabitFrequency
           show={show}
-          onHide={() => {
-            setShow(false);
-          }}
+          dayCycle={cycle}
+          daysList={days}
+          onHide={() => setShow(false)}
+          onCycleChange={(cycle) => setCycle(cycle)}
+          onDaysChange={(days) => setDays(days)}
         />
 
         <button id="header__button" type="button">

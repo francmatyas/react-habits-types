@@ -1,13 +1,13 @@
 import { v4 as uuidv4 } from "uuid";
 
 export enum HabitFrequency {
-  Monday,
-  Tuesday,
-  Wednesday,
-  Thursday,
-  Friday,
-  Saturday,
-  Sunday,
+  Monday = "Mon",
+  Tuesday = "Tue",
+  Wednesday = "Wed",
+  Thursday = "Thu",
+  Friday = "Fri",
+  Saturday = "Sat",
+  Sunday = "Sun",
 }
 
 interface IHabit {
@@ -40,7 +40,7 @@ export class Habit {
     this.completeCount = obj?.completeCount ?? 0;
   }
 
-  getFrequencyLabel(): string {
+  /* getFrequencyLabel(): string {
     if (this.days.length === 0) {
       return "Never";
     } else if (this.days.length === 7) {
@@ -69,7 +69,7 @@ export class Habit {
       }
     }
     return this.days.map((v) => HabitFrequency[v]).join(", ");
-  }
+  } */
 }
 
 interface IhabitList {

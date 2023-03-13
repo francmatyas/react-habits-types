@@ -1,13 +1,14 @@
 #habit-frequency {
   position: absolute;
   left: 24rem;
-  top: 4rem;
+  top: 4.5rem;
   width: 16rem;
 
   padding: 1rem;
   border-radius: 8px;
 
   background-color: white;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 
   display: flex;
   flex-direction: column;
@@ -73,11 +74,14 @@
 }
 
 #frequency-tag {
-height: min-content;
+  height: min-content;
   padding: 4px;
-  background-color: rgba($color: #000000, $alpha: 0.1);
+  background-color: #1976d2;
+  color: white;
+
   border-radius: 4px;
   font-size: 8px;
+  font-weight: bold;
   margin: 1px;
 
   display: flex;

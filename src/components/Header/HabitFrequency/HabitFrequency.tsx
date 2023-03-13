@@ -8,42 +8,70 @@ import { HiOutlineHandThumbUp } from "react-icons/hi2";
 
 import { Habit } from "../../../scripts/HabitUtils";
 
-import { HabitFrequency as HabitFrequencyType } from "../../../scripts/HabitUtils";
 import { FormGroup, FormControlLabel, Checkbox } from "@mui/material";
 
 interface HabitFrequencyProps {
   show: boolean;
+  dayCycle: number;
+  daysList: string[];
   onHide: () => void;
+  onCycleChange: (cycle: number) => void;
+  onDaysChange: (days: string[]) => void;
 }
 
+const daysObject = {
+  mon: "Monday",
+  tue: "Tuesday",
+  wed: "Wednesday",
+  thu: "Thursday",
+  fri: "Friday",
+  sat: "Saturday",
+  sun: "Sunday",
+};
+
 function HabitFrequency(props: HabitFrequencyProps) {
-  const { show, onHide } = props;
-  const [cycle, setCycle] = useState(1);
+  const { show, dayCycle, daysList, onHide, onCycleChange, onDaysChange } =
+    props;
+
+  const [cycle, setCycle] = useState<number>(dayCycle);
+  const [days, setDays] = useState<string[]>(daysList);
+
+  function submitHandler(): void {
+    onCycleChange(cycle);
+    onDaysChange(days);
+    onHide();
+  }
 
   return (
-    <ClickAwayListener onClickAway={() => onHide()}>
-      <>
-        {show ? (
+    <>
+      {show ? (
+        <ClickAwayListener onClickAway={() => onHide()}>
           <div id="habit-frequency">
             <div className="habit-frequency__col">
               <span className="habit-frequency__title">
                 Pick days for your habit.
               </span>
               <FormGroup>
-                {Object.keys(HabitFrequencyType)
-                  .filter((key) => isNaN(Number(key)))
-                  .map((key) => {
-                    return (
-                      <FormControlLabel
-                        key={key}
-                        control={
-                          <Checkbox /* onChange={() => {console.log(key); habit.frequency.push(HabitFrequencyType[key])}} */
-                          />
-                        }
-                        label={key}
-                      />
-                    );
-                  })}
+                {Object.entries(daysObject).map(([key, value]) => {
+                  return (
+                    <FormControlLabel
+                      key={key}
+                      control={
+                        <Checkbox
+                          onChange={() => {
+                            if (days.includes(key)) {
+                              setDays(days.filter((day) => day !== key));
+                            } else {
+                              setDays([...days, key]);
+                            }
+                          }}
+                          checked={days.find((day) => day === key) === key}
+                        />
+                      }
+                      label={value}
+                    />
+                  );
+                })}
               </FormGroup>
             </div>
             <div id="habit-frequency__spliter">
@@ -57,22 +85,25 @@ function HabitFrequency(props: HabitFrequencyProps) {
                 marks
                 min={1}
                 max={14}
-                defaultValue={1}
+                defaultValue={cycle}
                 valueLabelDisplay="auto"
+                onChange={(e, value) => {
+                  setCycle(value as number);
+                }}
               />
             </div>
             <Button
               variant="contained"
               id="habit-frequency__submit"
-              onClick={onHide}
+              onClick={submitHandler}
             >
               Sumbit
               <HiOutlineHandThumbUp size={24} />
             </Button>
           </div>
-        ) : null}
-      </>
-    </ClickAwayListener>
+        </ClickAwayListener>
+      ) : null}
+    </>
   );
 }
 
@@ -83,17 +114,17 @@ function FrequencyTag(props: { title: string }) {
 }
 
 const Tags: any = {
-  monday: <FrequencyTag title="Mon" />,
-  tuesday: <FrequencyTag title="Tue" />,
-  wednesday: <FrequencyTag title="Wed" />,
-  thursday: <FrequencyTag title="Thu" />,
-  friday: <FrequencyTag title="Fri" />,
-  saturday: <FrequencyTag title="Sat" />,
-  sunday: <FrequencyTag title="Sun" />,
+  mon: <FrequencyTag title="Mon" key={"tag-monday"} />,
+  tue: <FrequencyTag title="Tue" key={"tag-tuesday"} />,
+  wed: <FrequencyTag title="Wed" key={"tag-wednesday"} />,
+  thu: <FrequencyTag title="Thu" key={"tag-thursday"} />,
+  fri: <FrequencyTag title="Fri" key={"tag-friday"} />,
+  sat: <FrequencyTag title="Sat" key={"tag-saturday"} />,
+  sun: <FrequencyTag title="Sun" key={"tag-sunday"} />,
 
-  daily: <FrequencyTag title="Daily" />,
-  weekday: <FrequencyTag title="Weekday" />,
-  weekend: <FrequencyTag title="Weekend" />,
+  daily: <FrequencyTag title="Daily" key={"tag-daily"} />,
+  weekday: <FrequencyTag title="Weekday" key={"tag-weekday"} />,
+  weekend: <FrequencyTag title="Weekend" key={"tag-weekend"} />,
 };
 
 export function FrequencyTags(props: any) {
@@ -105,7 +136,7 @@ export function FrequencyTags(props: any) {
           return Tags[tag];
         })
       ) : (
-        <FrequencyTag title={`${cycle}x`} />
+        <FrequencyTag title={`${cycle} ${cycle > 1 ? "times" : "time"}`} />
       )}
     </div>
   );
