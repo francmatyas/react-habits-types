@@ -1,14 +1,10 @@
 import "./HabitFrequency.scss";
 import { useState } from "react";
 import { ClickAwayListener } from "@mui/base";
-
-import { Slider, Button } from "@mui/material";
+import { Slider, Button, FormGroup, FormControlLabel, Checkbox } from "@mui/material";
 
 import { HiOutlineHandThumbUp } from "react-icons/hi2";
-
-import { Habit } from "../../../scripts/HabitUtils";
-
-import { FormGroup, FormControlLabel, Checkbox } from "@mui/material";
+import { Habit, daysObject } from "../../../scripts/HabitUtils";
 
 interface HabitFrequencyProps {
   show: boolean;
@@ -18,16 +14,6 @@ interface HabitFrequencyProps {
   onCycleChange: (cycle: number) => void;
   onDaysChange: (days: string[]) => void;
 }
-
-const daysObject = {
-  mon: "Monday",
-  tue: "Tuesday",
-  wed: "Wednesday",
-  thu: "Thursday",
-  fri: "Friday",
-  sat: "Saturday",
-  sun: "Sunday",
-};
 
 function HabitFrequency(props: HabitFrequencyProps) {
   const { show, dayCycle, daysList, onHide, onCycleChange, onDaysChange } =

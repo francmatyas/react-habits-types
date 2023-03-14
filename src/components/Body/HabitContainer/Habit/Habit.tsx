@@ -8,7 +8,7 @@ import { Tooltip } from "@mui/material";
 
 function Habit(props: any) {
   const {
-    title,
+    name,
     streak,
     checkValue,
     type,
@@ -19,7 +19,7 @@ function Habit(props: any) {
   return (
     <div id="habit">
       <div id="habit__row">
-        <span id="habit__title">{title}</span>
+        <span id="habit__title">{name}</span>
         <span id="habit__streak">
           {streak >= 3 && (
             <>
@@ -42,7 +42,9 @@ function Habit(props: any) {
           </Tooltip>
         </div>
       ) : (
-        <Tooltip title={`Completed ${completeCount} out of ${dayCycle} times this week.`}>
+        <Tooltip
+          title={`Completed ${completeCount} out of ${dayCycle} times this week.`}
+        >
           <div id="habit__cycle">
             <span id="habit__cycle__count">{completeCount}</span>
             <span id="habit__cycle__dayCycle">/{dayCycle}</span>

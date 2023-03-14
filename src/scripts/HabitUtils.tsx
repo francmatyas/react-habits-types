@@ -1,13 +1,45 @@
 import { v4 as uuidv4 } from "uuid";
 
-export enum HabitFrequency {
-  Monday = "Mon",
-  Tuesday = "Tue",
-  Wednesday = "Wed",
-  Thursday = "Thu",
-  Friday = "Fri",
-  Saturday = "Sat",
-  Sunday = "Sun",
+export const daysObject = {
+  mon: "Monday",
+  tue: "Tuesday",
+  wed: "Wednesday",
+  thu: "Thursday",
+  fri: "Friday",
+  sat: "Saturday",
+  sun: "Sunday",
+};
+
+export function getDaysShortcut(days: string[]): string[] {
+  if (days.length === 0) {
+    return ["never"];
+  } else if (days.length === 7) {
+    return ["daily"];
+  } else if (days.length === 5) {
+    let isWeekday = true;
+
+    days.forEach((day) => {
+      if (day === "sat" || day === "sun") {
+        isWeekday = false;
+      }
+    });
+    if (isWeekday) {
+      return ["weekday"];
+    }
+  } else if (days.length === 2) {
+    let isWeekend = true;
+
+    days.forEach((day) => {
+      if (day !== "sat" && day !== "sun") {
+        isWeekend = false;
+      }
+    });
+    if (isWeekend) {
+      return ["weekend"];
+    }
+  }
+
+  return days;
 }
 
 interface IHabit {
@@ -15,9 +47,11 @@ interface IHabit {
   name: string;
   streak?: number;
   lastCompleted?: Date | undefined;
-  days?: HabitFrequency[];
+  days?: string[];
   dayCycle?: number;
   completeCount?: number;
+  type: "date" | "count";
+  checkValue?: string;
 }
 
 export class Habit {
@@ -25,9 +59,11 @@ export class Habit {
   name: string;
   streak: number;
   lastCompleted: Date | undefined;
-  days: HabitFrequency[];
+  days: string[];
   dayCycle: number;
   completeCount: number;
+  type: "date" | "count";
+  checkValue: string;
 
   constructor(obj: IHabit);
   constructor(obj?: IHabit) {
@@ -38,38 +74,9 @@ export class Habit {
     this.days = obj?.days ?? [];
     this.dayCycle = obj?.dayCycle ?? this.days.length;
     this.completeCount = obj?.completeCount ?? 0;
+    this.type = obj?.type ?? "count";
+    this.checkValue = obj?.checkValue ?? "U";
   }
-
-  /* getFrequencyLabel(): string {
-    if (this.days.length === 0) {
-      return "Never";
-    } else if (this.days.length === 7) {
-      return "Everyday";
-    } else if (this.days.length === 5) {
-      let isWeekday = true;
-
-      this.days.forEach((day) => {
-        if (day === HabitFrequency.Saturday || day === HabitFrequency.Sunday) {
-          isWeekday = false;
-        }
-      });
-      if (isWeekday) {
-        return "Weekdays";
-      }
-    } else if (this.days.length === 2) {
-      let isWeekend = true;
-
-      this.days.forEach((day) => {
-        if (day !== HabitFrequency.Saturday && day !== HabitFrequency.Sunday) {
-          isWeekend = false;
-        }
-      });
-      if (isWeekend) {
-        return "Weekends";
-      }
-    }
-    return this.days.map((v) => HabitFrequency[v]).join(", ");
-  } */
 }
 
 interface IhabitList {

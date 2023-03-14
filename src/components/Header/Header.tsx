@@ -1,6 +1,7 @@
 import "./Header.scss";
 import { useState } from "react";
 import HabitFrequency, { FrequencyTags } from "./HabitFrequency/HabitFrequency";
+import { getDaysShortcut } from "../../scripts/HabitUtils";
 
 import { HiOutlinePlus } from "react-icons/hi";
 import { Tooltip } from "@mui/material";
@@ -11,6 +12,7 @@ function Header() {
 
   const [cycle, setCycle] = useState<number>(1);
   const [days, setDays] = useState<string[]>([]);
+  const dayTags = getDaysShortcut(days);
 
   function createHandler(): void {
     console.log(name, cycle, days);
@@ -29,7 +31,7 @@ function Header() {
           <span>Select</span>
 
           {days.length > 0 ? (
-            <FrequencyTags tags={days} />
+            <FrequencyTags tags={dayTags} />
           ) : (
             <FrequencyTags cycle={cycle} />
           )}

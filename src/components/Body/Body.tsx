@@ -2,21 +2,45 @@ import "./Body.scss";
 
 import HabitContainer from "./HabitContainer/HabitContainer";
 import Habit from "./HabitContainer/Habit/Habit";
-import { Habit as HabitClass } from "../../scripts/HabitUtils";
+import { Habit as HabitClass, HabitList } from "../../scripts/HabitUtils";
 
 function Body() {
-  const habit1 = new HabitClass({name: "Test1"});
-  const habit2 = new HabitClass({name: "Test2"});
-  const habit3 = new HabitClass({name: "Test3"});
+  const habitList = new HabitList({
+    habits: [
+      new HabitClass({
+        name: "Test1",
+        streak: 6,
+        lastCompleted: new Date(),
+        days: ["mon", "tue", "wed", "thu", "fri", "sat", "sun"],
+        type: "date",
+      }),
+      new HabitClass({
+        name: "Test2",
+        streak: 18,
+        days: ["mon", "tue", "wed", "thu", "fri", "sat", "sun"],
+        type: "date",
+      }),
+      new HabitClass({
+        name: "Go to gym",
+        dayCycle: 3,
+        completeCount: 1,
+        type: "count",
+      }),
+    ],
+  });
+
   return (
     <main id="body">
       <HabitContainer type="date">
-        <Habit title="Test1" streak="6" checkValue="Y" type="date" lastCompleted={new Date()}/>
-        <Habit title="Test2" streak="18" checkValue="N" type="date"/>
+        {habitList.habitsDate.map((habit) => {
+          return <Habit {...habit} />;
+        })}
       </HabitContainer>
 
       <HabitContainer type="count">
-        <Habit title="Go to gym" streak="0" checkValue="M" type="count" dayCycle={3} completeCount={1}/>
+        {habitList.habitsCount.map((habit) => {
+          return <Habit {...habit} />;
+        })}
       </HabitContainer>
     </main>
   );
