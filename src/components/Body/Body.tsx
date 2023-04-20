@@ -1,5 +1,3 @@
-import "./Body.scss";
-
 import HabitContainer from "./HabitContainer/HabitContainer";
 import Habit from "./HabitContainer/Habit/Habit";
 import { Habit as HabitClass, HabitList } from "../../scripts/HabitUtils";

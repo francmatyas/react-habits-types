@@ -1,4 +1,3 @@
-import "./Header.scss";
 import { useState } from "react";
 import HabitFrequency, { FrequencyTags } from "./HabitFrequency/HabitFrequency";
 import { getDaysShortcut } from "../../scripts/HabitUtils";
