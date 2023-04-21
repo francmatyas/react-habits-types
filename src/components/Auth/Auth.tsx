@@ -1,6 +1,6 @@
 import React from "react";
-import pb from "../../lib/pocketbase.js";
 import { useForm } from "react-hook-form";
+import actionLib from "../../lib/actionLib";
 
 export default function Auth() {
   const { register, handleSubmit } = useForm();
@@ -9,7 +9,7 @@ export default function Auth() {
   async function login(data: any) {
     setLoading(true);
     try {
-      const authData = await pb
+      const authData = await actionLib.pb
         .collection("users")
         .authWithPassword(data.username, data.password);
     } catch (error) {
@@ -18,24 +18,10 @@ export default function Auth() {
     setLoading(false);
   }
 
-  async function signup() {
-    try {
-      const data = {
-        email: "",
-        password: "",
-      };
-
-      const createUser = await pb.collection("users").create(data);
-      await login(data);
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
   return (
     <div className="Auth">
       <h1>Auth</h1>
-      <p>Is valid: {pb.authStore.isValid && pb.authStore.model?.email}</p>
+      <p>Is valid: {actionLib.pb.authStore.isValid && actionLib.pb.authStore.model?.email}</p>
       {isLoading && <p>Loading ...</p>}
       <form onSubmit={handleSubmit(login)}>
         <input type="text" placeholder="username" {...register("username")} />

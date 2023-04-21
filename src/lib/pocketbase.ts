@@ -1,5 +1,5 @@
-import Pocketbase from 'pocketbase';
+import Pocketbase from "pocketbase";
 
-const pb = new Pocketbase(process.env.REACT_APP_POCKETBASE_URL);
+const pb: any = new Pocketbase("http://206.189.61.223/");
 
 export default pb;

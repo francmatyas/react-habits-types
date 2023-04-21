@@ -1,4 +1,5 @@
-import pb from "./lib/pocketbase.js";
+import pb from "./lib/pocketbase";
+import actionLib from "./lib/actionLib";
 
 import Auth from "./components/Auth/Auth";
 import Header from "./components/Header/Header";

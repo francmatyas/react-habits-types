@@ -5,7 +5,7 @@ import { Habit as HabitClass, HabitList } from "../../scripts/HabitUtils";
 function Body() {
   const habitList = new HabitList({
     habits: [
-      new HabitClass({
+      /* new HabitClass({
         name: "Test1",
         streak: 6,
         lastCompleted: new Date(),
@@ -23,7 +23,7 @@ function Body() {
         dayCycle: 3,
         completeCount: 1,
         type: "count",
-      }),
+      }), */
     ],
   });
 
